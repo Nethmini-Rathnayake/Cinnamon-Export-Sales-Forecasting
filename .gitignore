@@ -216,3 +216,33 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# ── Project-specific ──────────────────────────────────────────────────────────
+
+# Raw and processed data (large/binary — never commit)
+data/raw/
+data/processed/
+
+# Generated outputs (fully regeneratable)
+outputs/
+
+# Large / binary file types (safety net regardless of location)
+*.xlsx
+*.xls
+*.parquet
+*.feather
+*.arrow
+*.pkl
+*.pickle
+*.pt
+*.pth
+*.onnx
+*.h5
+*.hdf5
+*.cbm
+*.bin
+*.npy
+*.npz
+
+# Virtual environment
+.venv/

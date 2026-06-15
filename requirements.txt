@@ -1,0 +1,18 @@
+# ── Core data & I/O ──────────────────────────────────────────────────────────
+pandas==2.2.3
+numpy==1.26.4
+openpyxl==3.1.5
+
+# ── Modelling ─────────────────────────────────────────────────────────────────
+lightgbm==4.4.0
+scikit-learn==1.5.2
+
+# ── Nixtla forecasting stack ─────────────────────────────────────────────────
+statsforecast==1.7.8
+hierarchicalforecast==0.4.2
+
+# ── Visualisation ─────────────────────────────────────────────────────────────
+matplotlib==3.9.2
+
+# ── Optional: global neural model (uncomment to install) ──────────────────────
+# neuralforecast==1.7.4

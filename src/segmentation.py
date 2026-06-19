@@ -96,20 +96,26 @@ def _abc_class(total_qty: pd.Series) -> pd.Series:
 
 
 def _route(seg: pd.DataFrame) -> pd.Series:
-    """Assign model routing label."""
-    route = pd.Series("global_model", index=seg.index, dtype="object")
+    """Assign model routing label.
+
+    Routing is driven solely by ABC class and cold-start status.
+    demand_class is kept as a model feature and for per-segment reporting
+    in Phase 6, but does not gate routing here.
+
+    Rules (in priority order):
+      1. category_fallback  — is_cold_start (no history to train on)
+      2. global_model       — abc_class in {A, B}  (evaluable volume)
+      3. baseline_intermittent — abc_class == C  (long tail, low volume)
+
+    Note: intermittent-demand baselines (Croston, SBA, TSB, …) are computed
+    for ALL products regardless of route; final per-segment model selection
+    happens in Phase 6 after cross-validation metrics are compared.
+    """
+    route = pd.Series("baseline_intermittent", index=seg.index, dtype="object")
 
     cold = seg["is_cold_start"]
     route[cold] = "category_fallback"
-
-    baseline = (
-        ~cold
-        & (
-            seg["demand_class"].isin({"Lumpy", "Too sparse"})
-            | (seg["abc_class"] == "C")
-        )
-    )
-    route[baseline] = "baseline_intermittent"
+    route[~cold & seg["abc_class"].isin({"A", "B"})] = "global_model"
     return route
 
 

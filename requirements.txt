@@ -14,5 +14,10 @@ hierarchicalforecast==0.4.2
 # ── Visualisation ─────────────────────────────────────────────────────────────
 matplotlib==3.9.2
 
+# ── Notebook execution ────────────────────────────────────────────────────────
+nbformat==5.10.4
+nbconvert==7.16.4
+ipykernel==6.29.5
+
 # ── Optional: global neural model (uncomment to install) ──────────────────────
 # neuralforecast==1.7.4

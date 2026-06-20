@@ -25,7 +25,12 @@ import pandas as pd
 FEATURES_PATH = Path("data/processed/features_product.parquet")
 N_HORIZONS    = 12
 
-_SKIP_FEAT = {"ProductID", "week_start", "qty"}   # not model features
+_SKIP_FEAT = {
+    "ProductID", "week_start", "qty",
+    # Derived from whole-history volume (abc_class) and ADI (demand_class);
+    # both leak the target. Keep for routing and per-segment eval only.
+    "abc_class", "demand_class",
+}
 _CAL_COLS  = ["week_of_year", "month", "quarter",
                "week_of_month", "sin_annual", "cos_annual"]
 
